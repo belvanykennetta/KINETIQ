@@ -344,12 +344,12 @@ setInterval(() => {
 
 // ── Testimonials (Home) ───────────────────────────────────────────────────────
 const TESTIMONIALS = [
-  { text: 'This application revolutionized my workout operations, streamlining metrics and posture analysis.', name: 'Briana Patton', role: 'Fitness Coach', initials: 'BP' },
-  { text: 'Implementing KINETIQ tracking was smooth and quick. The UI is completely intuitive.', name: 'Bilal Ahmed', role: 'Athlete', initials: 'BA' },
-  { text: 'The 3D interactive layout and real-time responses keep me motivated every single day.', name: 'Saman Malik', role: 'Gym Enthusiast', initials: 'SM' },
-  { text: 'Its robust features and quick support transformed our training workflows entirely.', name: 'Omar Raza', role: 'Calisthenics Specialist', initials: 'OR' },
-  { text: 'The posture feedback is next-level. Never trained so precisely with real-time motion data.', name: 'Leila Hart', role: 'Yoga Instructor', initials: 'LH' },
-  { text: 'Clean design, powerful under the hood. Kinetiq is the only fitness tool I need.', name: 'James Kroft', role: 'Personal Trainer', initials: 'JK' },
+  { text: 'gila sih KINETIQ beneran next level, bisa liat otot mana yang gerak pas latihan, no more asal-asalan nge-gym bestie!', name: 'Shabrina Sarayati', role: 'Fitness Enthusiast', initials: 'SS' },
+  { text: 'vibes-nya dapet banget, visualisasi 3D ototnya tuh literally bikin aku makin semangat push harder every session fr fr.', name: 'Belvany Virginia', role: 'Gym Enthusiast', initials: 'BV' },
+  { text: 'bro ini app-nya slay abis, posture feedback-nya real-time dan akurat parah, no cap ini game changer buat training gue.', name: 'Jeremy Mattathias', role: 'Calisthenics Athlete', initials: 'JM' },
+  { text: 'aku yang tadinya lost banget soal form dan otot, skrg jadi ngerti banget thanks to KINETIQ, it just hits different!', name: 'Chelsea', role: 'Yoga Enthusiast', initials: 'C' },
+  { text: 'SHEEEESHHHH KINETIQ beda banget dari app gym biasa, muscle focus-nya detail parah, workout gue jadi makin on point!', name: 'Sultan Hamdi', role: 'Personal Trainer', initials: 'SH' },
+  { text: 'awalnya skeptis, eh ternyata KINETIQ BEUUHH banget, visualisasi ototnya clean dan gampang dipahami, highly recommend bestie!', name: 'Sitti Aminah', role: 'Fitness Coach', initials: 'SA' },
 ];
 
 function renderTestimonials() {

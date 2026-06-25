@@ -1,370 +1,493 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KINETIQ — Move Smarter, Train Better</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    :root {
-      --bg-base:        #0f1117;
-      --bg-surface:     #161b27;
-      --bg-card:        #1c2235;
-      --bg-card-hover:  #202840;
-      --bg-nav:         rgba(15,17,23,0.92);
-      --border-subtle:  #252d45;
-      --border-mid:     #2f3a58;
-      --border-bright:  #3d4f7a;
-      --accent:         #6366f1;
-      --accent-light:   #818cf8;
-      --accent-glow:    rgba(99,102,241,0.25);
-      --accent-2:       #22d3ee;
-      --text-primary:   #eef0f8;
-      --text-secondary: #8891aa;
-      --text-muted:     #4a5578;
-      --text-dim:       #2e3a55;
-      --gradient-hero:  linear-gradient(160deg, #eef0f8 0%, #7c85a8 100%);
-      --gradient-accent: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KINETIQ</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.14.0/dist/tabler-icons.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-base:#0f1117;--bg-surface:#161b27;--bg-card:#1c2235;--bg-card-hover:#202840;
+  --bg-nav:rgba(15,17,23,0.92);--border-subtle:#252d45;--border-mid:#2f3a58;--border-bright:#3d4f7a;
+  --accent:#6366f1;--accent-light:#818cf8;--accent-glow:rgba(99,102,241,0.25);--accent-2:#22d3ee;
+  --text-primary:#eef0f8;--text-secondary:#8891aa;--text-muted:#4a5578;--text-dim:#2e3a55;
+  --gradient-hero:linear-gradient(160deg,#eef0f8 0%,#7c85a8 100%);
+  --gradient-accent:linear-gradient(135deg,#6366f1 0%,#22d3ee 100%);
+}
+html,body{background:var(--bg-base);font-family:'Inter',system-ui,sans-serif;color:var(--text-primary)}
 
-    #kinetiq-root {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-base);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+/* ── PAGES ── */
+.page{display:none;animation:fadeIn 0.4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    .page { display: none; }
-    .page.active { display: block; }
+/* ── PAGE 1 NAV ── */
+.nav-p1{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-bottom:1px solid var(--border-subtle);background:var(--bg-nav);backdrop-filter:blur(12px)}
+.nav-logo{font-size:15px;font-weight:800;letter-spacing:0.06em;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-tabs-p1{display:flex;gap:4px}
+.nav-tab-p1{padding:7px 18px;border-radius:20px;border:1px solid transparent;background:transparent;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all .2s}
+.nav-tab-p1:hover{color:var(--text-primary);background:var(--bg-card)}
+.nav-tab-p1.active{color:var(--text-primary);border-color:var(--border-mid)}
 
-    /* NAV */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border-subtle);
-      background: var(--bg-nav);
-      backdrop-filter: blur(12px);
-    }
-    .nav-logo {
-      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .nav-link {
-      font-size: 12px; color: var(--text-muted); cursor: pointer; border: none; background: none;
-      transition: color 0.2s; padding: 6px 12px; border-radius: 20px;
-    }
-    .nav-link:hover { color: var(--text-primary); background: var(--bg-card); }
-    .nav-link.active { color: var(--text-primary); }
+/* ── HERO ── */
+.hero-outer{min-height:600px;display:flex;align-items:center;justify-content:center;padding:48px 24px 32px;background:var(--bg-base)}
+.hero-inner{max-width:920px;width:100%}
+.hero-title-wrap{text-align:center;margin-bottom:28px}
+.hero-tag{display:inline-block;border:1px solid var(--border-mid);background:var(--bg-card);color:var(--text-secondary);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:24px}
+.hero-h1{font-size:60px;font-weight:900;letter-spacing:-0.04em;line-height:1.05;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.hero-sub{font-size:14px;color:var(--text-secondary);font-weight:300;max-width:420px;margin:0 auto;line-height:1.75}
+.hero-img-wrapper{perspective:1000px}
+.hero-img-card{border:1px solid var(--border-subtle);border-radius:20px;overflow:hidden;background:var(--bg-surface);position:relative;transform-style:preserve-3d;will-change:transform;box-shadow:0 24px 60px rgba(0,0,0,0.5)}
+.hero-img-card img{width:100%;height:300px;object-fit:cover;display:block;filter:brightness(0.85) saturate(0.9)}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(15,17,23,0.7) 100%)}
+.dash-stats{display:flex;gap:1px;background:var(--border-subtle);border:1px solid var(--border-subtle);border-top:none;border-radius:0 0 20px 20px;overflow:hidden}
+.stat-card{background:var(--bg-card);padding:16px 20px;flex:1;border-right:1px solid var(--border-subtle)}
+.stat-card:last-child{border-right:none}
+.stat-val{font-size:22px;font-weight:700;margin-bottom:3px;letter-spacing:-0.02em}
+.stat-val.blue{color:#60a5fa}.stat-val.purple{color:var(--accent-light)}.stat-val.green{color:#4ade80}.stat-val.cyan{color:var(--accent-2)}
+.stat-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em}
 
-    /* HERO */
-    .hero-section { padding: 24px; background: var(--bg-base); }
-    .hero-card {
-      position: relative; overflow: hidden;
-      border: 1px solid var(--border-subtle); border-radius: 20px;
-      background: var(--bg-surface); display: flex; flex-direction: row; min-height: 520px;
-    }
-    .hero-left { flex: 1; padding: 56px 48px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 10; }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--bg-card); border: 1px solid var(--border-mid);
-      color: var(--text-secondary); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 5px 12px; border-radius: 20px; margin-bottom: 24px; width: fit-content;
-    }
-    .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s infinite; }
-    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .hero-title {
-      font-size: 72px; font-weight: 900; line-height: 0.92; letter-spacing: -0.04em;
-      background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;
-    }
-    .hero-subtitle { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 340px; margin-bottom: 36px; }
-    
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 8px; background: var(--gradient-accent); color: #fff;
-      padding: 12px 24px; border-radius: 40px; font-size: 13px; font-weight: 600; border: none; cursor: pointer;
-      transition: all 0.2s; width: fit-content; letter-spacing: -0.01em; box-shadow: 0 4px 24px var(--accent-glow);
-    }
-    .cta-btn:hover { transform: scale(1.03); box-shadow: 0 6px 32px rgba(99,102,241,0.4); }
-    .cta-arrow { transition: transform 0.2s; }
-    .cta-btn:hover .cta-arrow { transform: translateX(3px); }
+/* ── TEXT CYCLE ── */
+.text-cycle-section{padding:60px 24px;background:var(--bg-surface);border-top:1px solid var(--border-subtle);text-align:center}
+.text-cycle-wrap{max-width:600px;margin:0 auto}
+.cycle-heading{font-size:38px;font-weight:300;color:var(--text-muted);letter-spacing:-0.03em;line-height:1.2;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px}
+.cycle-word{font-weight:800;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;min-width:140px;text-align:center;transition:opacity .3s,transform .3s}
 
-    .hero-right { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .hero-3d-canvas { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
-    .floating-figure { position: relative; width: 220px; height: 320px; }
-    .figure-ring { position: absolute; border: 1px solid; border-radius: 50%; animation: orbit 8s linear infinite; }
-    .ring-1 { width: 300px; height: 300px; top: 10px; left: -40px; border-color: var(--border-subtle); animation-duration: 12s; }
-    .ring-2 { width: 200px; height: 200px; top: 60px; left: 10px; border-color: var(--border-mid); animation-duration: 8s; animation-direction: reverse; }
-    .ring-3 { width: 120px; height: 120px; top: 100px; left: 50px; border-color: rgba(99,102,241,0.3); animation-duration: 5s; }
-    @keyframes orbit { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    
-    .figure-body { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: float-body 4s ease-in-out infinite; }
-    @keyframes float-body { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-16px)} }
-    .figure-glow {
-      position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); width: 120px; height: 40px;
-      background: radial-gradient(ellipse, rgba(99,102,241,0.18) 0%, transparent 70%); border-radius: 50%; animation: glow-pulse 4s ease-in-out infinite;
-    }
-    @keyframes glow-pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
-    .hero-spotlight { position: absolute; top: -80px; left: -100px; width: 700px; height: 500px; background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.07) 0%, transparent 60%); pointer-events: none; }
+/* ── TESTIMONIALS ── */
+.testimonials-section{padding:64px 24px;background:var(--bg-base)}
+.testimonials-header{text-align:center;margin-bottom:48px}
+.t-badge{display:inline-block;border:1px solid var(--border-mid);background:var(--bg-card);color:var(--text-secondary);font-size:9px;text-transform:uppercase;letter-spacing:0.15em;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.t-title{font-size:36px;font-weight:800;letter-spacing:-0.03em;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.t-sub{font-size:13px;color:var(--text-muted);font-weight:300}
+.t-cols{display:flex;gap:16px;justify-content:center;max-height:520px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent,black 12%,black 88%,transparent);mask-image:linear-gradient(to bottom,transparent,black 12%,black 88%,transparent)}
+.t-col{width:240px;flex-shrink:0}
+.t-track{display:flex;flex-direction:column;gap:14px;animation:tScroll linear infinite}
+.t-a{animation-duration:20s}.t-b{animation-duration:27s}.t-c{animation-duration:23s}
+@keyframes tScroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.t-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:16px;padding:20px;width:240px;flex-shrink:0}
+.t-text{font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:14px}
+.t-author{display:flex;align-items:center;gap:10px}
+.t-avatar{width:34px;height:34px;border-radius:50%;border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;background:var(--bg-surface);color:var(--accent-light)}
+.t-name{font-size:12px;font-weight:500;color:var(--text-primary)}
+.t-role{font-size:10px;color:var(--text-muted)}
 
-    .stat-pills { position: absolute; right: 32px; bottom: 32px; display: flex; flex-direction: column; gap: 8px; z-index: 10; }
-    .stat-pill { background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(8px); }
-    .stat-pill-val { font-size: 16px; font-weight: 700; color: var(--text-primary); }
-    .stat-pill-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
-    .stat-pill-icon { font-size: 18px; color: var(--accent-light); }
+/* ── CTA ── */
+.cta-section{padding:48px 24px 56px;background:var(--bg-base);text-align:center}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gradient-accent);color:#fff;padding:14px 32px;border-radius:40px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .2s;box-shadow:0 0 40px var(--accent-glow);position:relative;overflow:hidden}
+.cta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#818cf8,#22d3ee);opacity:0;transition:opacity .2s}
+.cta-btn:hover::before{opacity:1}
+.cta-btn:hover{transform:translateY(-1px);box-shadow:0 0 60px rgba(99,102,241,0.5)}
+.cta-btn span,.cta-arrow{position:relative;z-index:1}
+.cta-btn:hover .cta-arrow{transform:translateX(4px)}
+.cta-arrow{transition:transform .2s}
+.pg-footer{text-align:center;padding:24px;font-size:10px;color:var(--text-dim)}
 
-    /* TEXT SECTION */
-    .text-cycle-section { border-top: 1px solid var(--border-subtle); background: var(--bg-surface); padding: 80px 24px; text-align: center; }
-    .text-cycle-headline { font-size: 44px; font-weight: 300; letter-spacing: -0.03em; color: var(--text-muted); line-height: 1.2; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
-    .cycling-word { display: inline-block; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: opacity 0.3s; min-width: 160px; text-align: left; }
+/* ══════════════════════════════════════
+   PAGE 2 — EXERCISE FINDER
+   ══════════════════════════════════════ */
+#page-exercise{background:var(--bg-base);min-height:100vh}
 
-    /* TESTIMONIALS */
-    .testimonials-section { padding: 80px 24px; background: var(--bg-base); overflow: hidden; }
-    .testimonials-header { text-align: center; margin-bottom: 56px; }
-    .testimonials-badge { display: inline-block; border: 1px solid var(--border-mid); background: var(--bg-card); color: var(--text-secondary); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
-    .testimonials-title { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
-    .testimonials-subtitle { font-size: 13px; color: var(--text-muted); font-weight: 300; }
-    .testimonials-columns { display: flex; gap: 16px; justify-content: center; -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent); mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent); max-height: 580px; overflow: hidden; }
-    .testimonials-col { display: flex; flex-direction: column; gap: 16px; width: 260px; flex-shrink: 0; }
-    .testimonials-col-track { display: flex; flex-direction: column; gap: 16px; animation: scrollUp linear infinite; }
-    .col-a { animation-duration: 20s; } .col-b { animation-duration: 26s; } .col-c { animation-duration: 23s; }
-    @keyframes scrollUp { from{transform:translateY(0)} to{transform:translateY(-50%)} }
-    .testimonial-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 24px; width: 260px; flex-shrink: 0; }
-    .testimonial-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; }
-    .testimonial-author { display: flex; align-items: center; gap: 10px; }
-    .author-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--bg-surface); border: 1px solid var(--border-mid); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--accent-light); }
-    .author-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
-    .author-role { font-size: 11px; color: var(--text-muted); }
+/* Scrollable nav */
+.nav-p2{position:sticky;top:0;z-index:100;background:var(--bg-nav);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-subtle)}
+.nav-p2-top{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.nav-p2-logo{font-size:14px;font-weight:800;letter-spacing:.06em;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--text-muted);font-size:11px;border:none;background:none;cursor:pointer;transition:color .2s;font-family:inherit}
+.back-btn:hover{color:var(--text-primary)}
+.nav-scroll-outer{position:relative}
+.nav-scroll-wrap{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:0 20px 12px;cursor:grab;user-select:none}
+.nav-scroll-wrap::-webkit-scrollbar{display:none}
+.nav-scroll-wrap.dragging{cursor:grabbing}
+.ex-nav-tabs{display:flex;gap:6px;width:max-content}
+.ex-nav-tab{padding:6px 16px;border-radius:20px;border:1px solid transparent;background:transparent;font-size:11px;font-weight:500;color:var(--text-muted);cursor:pointer;white-space:nowrap;transition:all .2s;letter-spacing:.01em;font-family:inherit}
+.ex-nav-tab:hover{color:var(--text-primary);background:var(--bg-card)}
+.ex-nav-tab.active{color:var(--text-primary);border-color:var(--border-mid)}
+.scroll-fade{position:absolute;right:0;top:0;bottom:0;width:40px;background:linear-gradient(to right,transparent,rgba(15,17,23,.9));pointer-events:none}
 
-    /* EXERCISE FINDER */
-    #page-exercise { background: var(--bg-base); min-height: 100vh; position: relative; }
-    .exercise-spotlight { position: fixed; pointer-events: none; z-index: 0; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%); transition: left 0.1s, top 0.1s; }
-    .exercise-nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid var(--border-subtle); background: rgba(15,17,23,0.92); backdrop-filter: blur(12px); }
-    .back-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; }
-    .back-btn:hover { color: var(--text-primary); }
-    
-    .exercise-content { max-width: 900px; margin: 0 auto; padding: 40px 32px; position: relative; z-index: 1; }
-    .exercise-header { margin-bottom: 36px; }
-    .exercise-title { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 8px; }
-    .exercise-sub { font-size: 13px; color: var(--text-secondary); }
+/* Main content */
+.ex-main{max-width:680px;margin:0 auto;padding:36px 20px}
+.section-title{font-size:28px;font-weight:900;letter-spacing:-.03em;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.section-sub{font-size:12px;color:var(--text-muted);margin-bottom:28px}
+.stack-outer{background:rgba(22,27,39,.5);border:1px solid var(--border-subtle);border-radius:20px;padding:28px;backdrop-filter:blur(12px)}
 
-    /* SEARCH & FILTER CONTROLS */
-    .controls-row { display: flex; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; }
-    .search-bar { position: relative; flex: 1; max-width: 320px; }
-    .search-bar i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; }
-    .search-bar input { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 10px 14px 10px 40px; border-radius: 12px; color: var(--text-primary); font-family: inherit; font-size: 13px; transition: border-color 0.2s; }
-    .search-bar input:focus { outline: none; border-color: var(--accent); }
-    
-    .filter-group { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
-    .filter-btn { background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-    .filter-btn:hover { color: var(--text-primary); border-color: var(--border-mid); }
-    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 4px 12px var(--accent-glow); }
+/* Layout toggle */
+.layout-toggle{display:flex;gap:3px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:10px;padding:3px;margin:0 auto 20px;width:fit-content}
+.lb{padding:7px 11px;border-radius:7px;border:none;cursor:pointer;background:transparent;color:var(--text-muted);font-size:13px;transition:all .2s;font-family:inherit}
+.lb.active{background:var(--gradient-accent);color:#fff}
+.lb:hover:not(.active){color:var(--text-primary);background:var(--bg-card)}
 
-    .stack-container { border: 1px solid var(--border-subtle); background: rgba(22,27,39,0.7); border-radius: 20px; padding: 40px; backdrop-filter: blur(12px); }
-    .layout-toggle { display: flex; align-items: center; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 4px; width: fit-content; margin: 0 auto 36px; }
-    .layout-btn { padding: 7px 10px; border-radius: 7px; border: none; cursor: pointer; background: transparent; color: var(--text-muted); font-size: 14px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-    .layout-btn.active { background: var(--accent); color: #fff; }
-    .layout-btn:hover:not(.active) { color: var(--text-primary); }
+/* Stack scene */
+.stack-scene{position:relative;height:230px;width:100%;max-width:300px;margin:0 auto 16px;perspective:800px}
+.w-card{position:absolute;width:100%;height:210px;border:1px solid var(--border-subtle);border-radius:16px;background:var(--bg-card);padding:20px;cursor:grab;user-select:none;transform-origin:center bottom;will-change:transform;transition:box-shadow .2s}
+.w-card.is-top{border-color:var(--border-mid)}
+.w-card.is-top:active{cursor:grabbing}
+.w-card.animating{transition:transform .35s cubic-bezier(.25,.46,.45,.94),opacity .35s}
+.w-card.settling{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.card-icon{width:40px;height:40px;border-radius:10px;background:var(--bg-surface);border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px;color:var(--accent-light)}
+.card-title{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px}
+.card-desc{font-size:11px;color:var(--text-secondary);line-height:1.65}
+.swipe-hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
+.swipe-dir{position:absolute;top:50%;transform:translateY(-50%);font-size:11px;font-weight:600;pointer-events:none;opacity:0;transition:opacity .15s;border-radius:8px;padding:4px 10px}
+.swipe-left{left:12px;background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.swipe-right{right:12px;background:rgba(99,102,241,.15);color:var(--accent-light);border:1px solid rgba(99,102,241,.3)}
 
-    /* LOADING & ERROR STATES */
-    .loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0; gap: 16px; }
-    .spinner { width: 32px; height: 32px; border: 3px solid var(--border-subtle); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .error-msg, .empty-msg { text-align: center; color: var(--text-secondary); padding: 40px 20px; font-size: 14px; border: 1px dashed var(--border-subtle); border-radius: 16px; background: rgba(22,27,39,0.3); }
+/* Dot nav */
+.dot-nav{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.dot{height:5px;border-radius:3px;background:var(--border-subtle);transition:all .2s;cursor:pointer}
+.dot.active{background:var(--gradient-accent);width:18px}
+.dot:not(.active){width:5px}
+.dot:hover:not(.active){background:var(--border-mid)}
 
-    /* STACK LAYOUT */
-    .cards-stack-wrapper { position: relative; width: 260px; height: 230px; margin: 0 auto 24px; }
-    .workout-card { border: 1px solid var(--border-subtle); border-radius: 16px; background: var(--bg-card); padding: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
-    .workout-card.stack-mode { position: absolute; width: 260px; height: 210px; }
-    .workout-card.stack-0 { top: 0; left: 0; z-index: 4; }
-    .workout-card.stack-1 { top: 8px; left: 8px; z-index: 3; transform: scale(0.96); opacity: 0.8; pointer-events: none; }
-    .workout-card.stack-2 { top: 16px; left: 16px; z-index: 2; transform: scale(0.92); opacity: 0.5; pointer-events: none; }
-    .workout-card.stack-3 { top: 24px; left: 24px; z-index: 1; transform: scale(0.88); opacity: 0.2; pointer-events: none; }
-    .workout-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
-    .workout-card.active-top { border-color: var(--accent); box-shadow: 0 8px 32px rgba(15,17,23,0.5); }
-
-    .card-icon-wrap { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-surface); border: 1px solid var(--border-mid); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent-light); margin-bottom: 14px; }
-    .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-    .card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; margin-bottom: 12px; }
-    .card-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-    .diff-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-    .cat-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary); }
-    .swipe-hint { display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 14px; border-top: 1px solid var(--border-subtle); padding-top: 10px; width: 100%; }
-    .swipe-hint span:hover { color: var(--accent-light); }
-
-    /* GRID LAYOUT */
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .workout-card.grid-mode { min-height: 180px; }
-
-    /* LIST LAYOUT */
-    .cards-list { display: flex; flex-direction: column; gap: 12px; }
-    .workout-card.list-mode { display: flex; flex-direction: row; align-items: center; gap: 16px; padding: 16px; }
-    .workout-card.list-mode .card-icon-wrap { margin-bottom: 0; flex-shrink: 0; }
-    .workout-card.list-mode .card-desc { display: none; }
-
-    .dot-nav { display: flex; justify-content: center; gap: 6px; margin-top: 24px; }
-    .dot { height: 5px; border-radius: 3px; cursor: pointer; background: var(--border-mid); transition: all 0.2s; }
-    .dot.active { background: var(--accent); width: 16px; }
-    .dot:not(.active) { width: 5px; }
-
-    /* PAGE 3: DETAIL LATIHAN & THREE.JS VISUALIZER */
-    #page-detail { background: var(--bg-base); min-height: 100vh; }
-    .detail-container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-    .detail-header { margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
-    .detail-category { font-size: 11px; text-transform: uppercase; color: var(--accent-2); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 6px; }
-    .detail-title { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
-    .detail-equipment { font-size: 13px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; }
-    
-    .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 24px; }
-    @media (max-width: 850px) { .detail-grid { grid-template-columns: 1fr; } }
-    
-    .viewer-panel { background: #0c0e14; border: 1px solid var(--border-subtle); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
-    .viewer-label { position: absolute; top: 16px; left: 16px; background: rgba(22,27,39,0.7); border: 1px solid var(--border-subtle); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: var(--text-secondary); font-weight: 500; z-index: 5; backdrop-filter: blur(8px); }
-    .glb-container { width: 100%; height: 460px; position: relative; }
-    .viewer-controls-hint { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); padding: 12px 16px; font-size: 11px; color: var(--text-muted); display: flex; justify-content: center; gap: 16px; }
-    
-    .viewer-loading { position: absolute; inset: 0; background: #0f1117; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 4; }
-    .viewer-spinner { width: 24px; height: 24px; border: 2px solid var(--border-subtle); border-top-color: var(--accent-2); border-radius: 50%; animation: spin 0.6s linear infinite; }
-    
-    .detail-info { display: flex; flex-direction: column; gap: 20px; }
-    .detail-section { background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 24px; border-radius: 18px; }
-    .section-label { font-size: 12px; text-transform: uppercase; color: var(--accent-light); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; }
-    .detail-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
-    
-    .muscle-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .muscle-tag { font-size: 12px; padding: 4px 12px; border-radius: 6px; font-weight: 500; }
-    .muscle-tag.primary { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); color: var(--accent-light); }
-    .muscle-tag.secondary { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.2); color: var(--accent-2); }
-    
-    .tips-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .tips-list li { font-size: 13px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-    .tips-list i { margin-top: 3px; color: var(--accent-light); font-size: 14px; }
-    .tips-list.benefits i { color: #4ade80; }
-
-    .page-footer { text-align: center; padding: 32px 24px; font-size: 11px; color: var(--text-dim); border-top: 1px solid var(--border-subtle); margin-top: 40px; }
-  </style>
+/* Grid & List */
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cards-list{display:flex;flex-direction:column;gap:8px}
+.gm,.lm{border:1px solid var(--border-subtle);border-radius:14px;background:var(--bg-card);padding:16px;transition:border-color .2s}
+.gm:hover,.lm:hover{border-color:var(--border-mid)}
+.lm{display:flex;align-items:center;gap:14px}
+.lm .card-icon{margin-bottom:0;flex-shrink:0;width:34px;height:34px;font-size:15px}
+</style>
 </head>
 <body>
 
-<div id="kinetiq-root">
-  <nav class="nav">
+<!-- ═══════════ PAGE 1 ═══════════ -->
+<div class="page active" id="page-home">
+  <nav class="nav-p1">
     <div class="nav-logo">KINETIQ</div>
-    <div style="display:flex;gap:4px">
-      <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
-      <button class="nav-link" onclick="showPage('exercise')" id="nav-exercise">Exercise Finder</button>
+    <div class="nav-tabs-p1">
+      <button class="nav-tab-p1 active" onclick="gotoPage('home')">Landing</button>
+      <button class="nav-tab-p1" onclick="gotoPage('exercise')">Exercise Finder</button>
     </div>
   </nav>
 
-  <div class="page active" id="page-home">
-    <section class="hero-section">
-      <div class="hero-card">
-        <div class="hero-spotlight"></div>
-        <div class="hero-left">
-          <div class="hero-eyebrow"><div class="hero-dot"></div>Now Live — v2.6 Engine</div>
-          <h1 class="hero-title">KINE<br>TIQ</h1>
-          <p class="hero-subtitle">Move Smarter, Train Better. Experience premium real-time interactive posture tracking and kinetic analysis.</p>
-          <button class="cta-btn" onclick="showPage('exercise')">
-            Find Your Perfect Exercise <span class="cta-arrow"><i class="ti ti-arrow-right"></i></span>
-          </button>
-        </div>
-        <div class="hero-right">
-          <div class="hero-3d-canvas">
-            <div class="floating-figure">
-              <div class="ring-1 figure-ring"></div>
-              <div class="ring-2 figure-ring"></div>
-              <div class="ring-3 figure-ring"></div>
-              <div class="figure-body">
-                <svg width="110" height="180" viewBox="0 0 110 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="55" cy="22" r="16" fill="#1c2235" stroke="#3d4f7a" stroke-width="1.5"/>
-                  <rect x="40" y="44" width="30" height="58" rx="8" fill="#1c2235" stroke="#2f3a58" stroke-width="1.5"/>
-                  <rect x="10" y="46" width="28" height="44" rx="7" fill="#161b27" stroke="#252d45" stroke-width="1.5" transform="rotate(-8 10 46)"/>
-                  <rect x="72" y="46" width="28" height="44" rx="7" fill="#161b27" stroke="#252d45" stroke-width="1.5" transform="rotate(8 72 46)"/>
-                  <rect x="38" y="104" width="14" height="52" rx="6" fill="#1c2235" stroke="#2f3a58" stroke-width="1.5"/>
-                  <rect x="58" y="104" width="14" height="52" rx="6" fill="#1c2235" stroke="#2f3a58" stroke-width="1.5"/>
-                  <circle cx="55" cy="22" r="8" fill="#252d45" opacity="0.9"/>
-                  <path d="M42 68 Q55 75 68 68" stroke="#6366f1" stroke-width="1.2" fill="none" opacity="0.7"/>
-                </svg>
-              </div>
-              <div class="figure-glow"></div>
-            </div>
-          </div>
-          <div class="stat-pills">
-            <div class="stat-pill"><span class="stat-pill-icon"><i class="ti ti-flame"></i></span><div><div class="stat-pill-val">847</div><div class="stat-pill-label">Calories / hr</div></div></div>
-            <div class="stat-pill"><span class="stat-pill-icon"><i class="ti ti-heart-rate-monitor"></i></span><div><div class="stat-pill-val">142 bpm</div><div class="stat-pill-label">Heart Rate</div></div></div>
-            <div class="stat-pill"><span class="stat-pill-icon"><i class="ti ti-trending-up"></i></span><div><div class="stat-pill-val">98%</div><div class="stat-pill-label">Form Score</div></div></div>
-          </div>
-        </div>
+  <!-- Hero -->
+  <section class="hero-outer">
+    <div class="hero-inner">
+      <div class="hero-title-wrap">
+        <div class="hero-tag">Real-time Kinetic Intelligence</div>
+        <h1 class="hero-h1">Train Smarter.<br>Move Further.</h1>
+        <p class="hero-sub">Premium posture tracking, intelligent analytics, and immersive fitness flows — all in one platform.</p>
       </div>
-    </section>
-    <section class="text-cycle-section"><h2 class="text-cycle-headline">Your <span class="cycling-word" id="cycle-word">workouts</span> starts here.</h2></section>
-    <section class="testimonials-section">
-      <div class="testimonials-header"><div class="testimonials-badge">Testimonials</div><h2 class="testimonials-title">What our users say</h2><p class="testimonials-subtitle">See how athletes worldwide are enhancing their kinetic workflows.</p></div>
-      <div class="testimonials-columns" id="testimonials-cols"></div>
-    </section>
-    <div class="page-footer">© 2026 KINETIQ Engineering Pipeline.</div>
-  </div>
-
-  <div class="page" id="page-exercise">
-    <div id="exercise-spotlight-cursor" class="exercise-spotlight"></div>
-    <nav class="exercise-nav">
-      <button class="back-btn" onclick="showPage('home')"><i class="ti ti-chevron-left"></i> Kembali ke Dashboard</button>
-      <span style="font-size:13px;font-weight:600;color:var(--text-muted)">WORKOUT CATALOG</span>
-    </nav>
-    <div class="exercise-content">
-      <div class="exercise-header">
-        <h1 class="exercise-title">Katalog Latihan Otot</h1>
-        <p class="exercise-sub">Gunakan filter kelompok otot atau cari gerakan gym interaktif yang ingin kamu pelajari.</p>
-      </div>
-
-      <div class="controls-row">
-        <div class="search-bar">
-          <i class="ti ti-search"></i>
-          <input type="text" id="search-input" placeholder="Cari gerakan latihan..." oninput="onSearchInput(event)">
+      <div class="hero-img-wrapper" id="hero-wrapper">
+        <div class="hero-img-card" id="hero-card">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80&fit=crop" alt="Gym training"/>
+          <div class="hero-img-overlay"></div>
         </div>
-        <div class="filter-group" id="category-filter">
-          </div>
-      </div>
-
-      <div class="stack-container">
-        <div class="layout-toggle">
-          <button class="layout-btn active" id="btn-stack" onclick="setLayout('stack')" title="Stack view"><i class="ti ti-layers-intersect"></i></button>
-          <button class="layout-btn" id="btn-grid" onclick="setLayout('grid')" title="Grid view"><i class="ti ti-layout-grid"></i></button>
-          <button class="layout-btn" id="btn-list" onclick="setLayout('list')" title="List view"><i class="ti ti-layout-list"></i></button>
+        <div class="dash-stats">
+          <div class="stat-card"><div class="stat-val blue">2.4M</div><div class="stat-label">Active Users</div></div>
+          <div class="stat-card"><div class="stat-val purple">98%</div><div class="stat-label">Accuracy</div></div>
+          <div class="stat-card"><div class="stat-val green">+34%</div><div class="stat-label">Avg. Gains</div></div>
+          <div class="stat-card"><div class="stat-val cyan">4.9★</div><div class="stat-label">App Rating</div></div>
         </div>
-
-        <div id="exercise-loading" class="loader-container" style="display: none;">
-          <div class="spinner"></div>
-          <p style="font-size: 12px; color: var(--text-secondary)">Menghubungkan ke API Kinetiq...</p>
-        </div>
-
-        <div id="cards-area"></div>
       </div>
     </div>
-    <div class="page-footer">© 2026 KINETIQ Engineering Pipeline.</div>
-  </div>
+  </section>
 
-  <div class="page" id="page-detail">
-    <nav class="exercise-nav">
-      <button class="back-btn" onclick="showPage('exercise')"><i class="ti ti-arrow-left"></i> Kembali ke Katalog</button>
-      <span style="font-size:13px;font-weight:600;color:var(--accent-2)">3D WORKOUT VIEW</span>
-    </nav>
-    <div class="detail-container" id="detail-content">
+  <!-- Text Cycle -->
+  <section class="text-cycle-section">
+    <div class="text-cycle-wrap">
+      <div class="cycle-heading">
+        Your&nbsp;<span class="cycle-word" id="cycle-word">workouts</span>&nbsp;starts here.
       </div>
-    <div class="page-footer">© 2026 KINETIQ Engineering Pipeline.</div>
-  </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:16px;font-weight:300">Track every rep. Analyze every motion. Dominate every session.</p>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <div class="t-badge">Testimonials</div>
+      <h2 class="t-title">What our users say</h2>
+      <p class="t-sub">Athletes worldwide upgrading their kinetic game.</p>
+    </div>
+    <div class="t-cols" id="t-cols"></div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <button class="cta-btn" onclick="gotoPage('exercise')">
+      <span>Find Your Perfect Exercise</span>
+      <i class="ti ti-arrow-right cta-arrow" aria-hidden="true"></i>
+    </button>
+  </section>
+  <div class="pg-footer">© 2026 KINETIQ Engineering Pipeline · Powered by Framer Motion &amp; shadcn/ui</div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<!-- ═══════════ PAGE 2 ═══════════ -->
+<div class="page" id="page-exercise">
+  <nav class="nav-p2">
+    <div class="nav-p2-top">
+      <button class="back-btn" onclick="gotoPage('home')">
+        <i class="ti ti-chevron-left" aria-hidden="true"></i> Back to Landing
+      </button>
+      <div class="nav-p2-logo">KINETIQ</div>
+    </div>
+    <div class="nav-scroll-outer">
+      <div class="nav-scroll-wrap" id="navScroll">
+        <div class="ex-nav-tabs" id="exNavTabs">
+          <button class="ex-nav-tab active" onclick="setExTab(this)">Exercise Finder</button>
+        </div>
+      </div>
+      <div class="scroll-fade"></div>
+    </div>
+  </nav>
 
-<script src="/js/api.js"></script>
-<script src="/js/viewer.js"></script>
-<script src="/js/app.js"></script>
+  <div class="ex-main">
+    <h1 class="section-title">Find Your Workout</h1>
+    <p class="section-sub">Drag card ke kiri untuk skip · Drag ke kanan untuk pilih</p>
+    <div class="stack-outer">
+      <div class="layout-toggle">
+        <button class="lb active" id="lb-stack" onclick="setLayout('stack')"><i class="ti ti-layers-intersect" aria-hidden="true"></i></button>
+        <button class="lb" id="lb-grid" onclick="setLayout('grid')"><i class="ti ti-layout-grid" aria-hidden="true"></i></button>
+        <button class="lb" id="lb-list" onclick="setLayout('list')"><i class="ti ti-layout-list" aria-hidden="true"></i></button>
+      </div>
+      <div id="cardsArea"></div>
+    </div>
+  </div>
+  <div class="pg-footer">© 2026 KINETIQ · All systems nominal</div>
+</div>
 
+<script>
+// ── DATA ──────────────────────────────────────────────
+const CARDS = [
+  {id:0, category:'core', title:'Core Routine',  desc:'Sculpt and stabilize your midline with precision plank, hollow-body, and rotational work.', icon:'ti-circles-relation'},
+  {id:1, category:'legs', title:'Legs Routine',  desc:'Build power, depth, and lower-body explosion with squats, lunges, and deadlift chains.',    icon:'ti-run'},
+  {id:2, category:'pull', title:'Pull Routine',  desc:'Focus on back, traps, and absolute upper body pull strength via rows and pull-up variations.', icon:'ti-arrows-vertical'},
+  {id:3, category:'push', title:'Push Routine',  desc:'Dominate chest, shoulders, and triceps compression metrics with progressive overload.',     icon:'ti-bolt'},
+  
+  // Tambahan Pilihan Gerakan Spesifiknya:
+  {id:4, category:'core', title:'Bicycle Crunches', desc:'Latihan crunch interaktif yang meniru gerakan mengayuh sepeda.', icon:'ti-circles-relation'},
+  {id:5, category:'core', title:'Plank', desc:'Latihan isometrik menahan posisi tubuh sejajar untuk membangun ketahanan core.', icon:'ti-circles-relation'},
+  {id:6, category:'legs', title:'Barbell Squat', desc:'Raja dari segala latihan kaki untuk merangsang pertumbuhan paha depan.', icon:'ti-run'},
+  {id:7, category:'legs', title:'Deadlift', desc:'Latihan compound legendaris untuk mengangkat beban murni dari lantai.', icon:'ti-run'},
+  {id:8, category:'pull', title:'Pull-Up', desc:'Latihan beban tubuh terbaik untuk melebarkan sayap punggung.', icon:'ti-arrows-vertical'},
+  {id:9, category:'push', title:'Barbell Bench Press', desc:'Latihan compound utama untuk membangun ketebalan otot dada.', icon:'ti-bolt'}
+];
+
+const TESTIMONIALS = [
+  {text:'gila sih KINETIQ beneran next level, bisa liat otot mana yang gerak pas latihan, no more asal asalan nge-gym bestie!', name:'Shabrina Sarayati', role:'Fitness Enthusiast', initials:'SS'},
+  {text:'vibesnya dapet banget, visualisasi 3D ototnya tuh literally bikin aku makin semangat push harder every session fr fr.',  name:'Belvany Virginia',  role:'Gym Enthusiast',     initials:'BV'},
+  {text:'Bro ini appnya slay abis, posture feedbacknya real-time dan akurat parah, no cap ini game changer buat training gue.',   name:'Jeremy Mattathias', role:'Calisthenics Athlete',initials:'JM'},
+  {text:'i yang tadinya lost banget soal form dan otot, skrg jadi ngerti banget thanks to KINETIQ, it just hits different!',      name:'Chelsea',           role:'Yoga Enthusiast',    initials:'C'},
+  {text:'SHEEESHH kinetiq beda banget dari app gym biasa, muscle focusnya detail parah, workout gue jadi makin on point',         name:'Sultan Hamdi',      role:'Personal Trainer',   initials:'SH'},
+  {text:'Awalnya skeptis, eh ternyata KINETIQ legit banget, visualisasi ototnya clean dan gampang dipahami, highly recommend!',   name:'Sitti Aminah',      role:'Fitness Coach',      initials:'SA'},
+];
+
+// ── PAGE ROUTING ──────────────────────────────────────
+function gotoPage(p) {
+  document.getElementById('page-home').classList.remove('active');
+  document.getElementById('page-exercise').classList.remove('active');
+  document.getElementById(p === 'home' ? 'page-home' : 'page-exercise').classList.add('active');
+  window.scrollTo(0, 0);
+  if (p === 'exercise') renderCards();
+}
+
+// ── HERO TILT ─────────────────────────────────────────
+(function(){
+  const wrapper = document.getElementById('hero-wrapper');
+  const card    = document.getElementById('hero-card');
+  if (!wrapper || !card) return;
+  let mouseX = 0, mouseY = 0, tiltX = 0, tiltY = 0;
+  wrapper.addEventListener('mousemove', e => {
+    const r = wrapper.getBoundingClientRect();
+    mouseX = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+    mouseY = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+  });
+  wrapper.addEventListener('mouseleave', () => { mouseX = 0; mouseY = 0; });
+  (function animate(ts) {
+    tiltX += (mouseY * -10 - tiltX) * 0.1;
+    tiltY += (mouseX *  10 - tiltY) * 0.1;
+    const floatY = Math.sin((ts / 5000) * Math.PI * 2) * -10;
+    card.style.transform = `translateY(${floatY}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    requestAnimationFrame(animate);
+  })(0);
+})();
+
+// ── TEXT CYCLE ────────────────────────────────────────
+const WORDS = ['workouts','progress','performance','training','strength','form','goals','body'];
+let wordIdx = 0;
+setInterval(() => {
+  wordIdx = (wordIdx + 1) % WORDS.length;
+  const el = document.getElementById('cycle-word');
+  if (!el) return;
+  el.style.opacity = '0'; el.style.transform = 'translateY(-10px)';
+  setTimeout(() => {
+    el.textContent = WORDS[wordIdx];
+    el.style.transition = 'opacity .38s,transform .38s';
+    el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+  }, 320);
+}, 2500);
+
+// ── TESTIMONIALS ──────────────────────────────────────
+function renderTestimonials() {
+  const cols = document.getElementById('t-cols');
+  if (!cols) return;
+  const makeCard = t => `<div class="t-card"><p class="t-text">${t.text}</p><div class="t-author"><div class="t-avatar">${t.initials}</div><div><div class="t-name">${t.name}</div><div class="t-role">${t.role}</div></div></div></div>`;
+  const makeCol  = (items, cls) => {
+    const doubled = [...items, ...items];
+    return `<div class="t-col"><div class="t-track ${cls}">${doubled.map(makeCard).join('')}</div></div>`;
+  };
+  cols.innerHTML =
+    makeCol([TESTIMONIALS[0], TESTIMONIALS[1], TESTIMONIALS[2]], 't-a') +
+    makeCol([TESTIMONIALS[2], TESTIMONIALS[3], TESTIMONIALS[4]], 't-b') +
+    makeCol([TESTIMONIALS[4], TESTIMONIALS[5], TESTIMONIALS[0]], 't-c');
+}
+renderTestimonials();
+
+// ── EX PAGE NAV DRAG SCROLL ───────────────────────────
+const navWrap = document.getElementById('navScroll');
+let nDrag = false, nStartX = 0, nScrollLeft = 0;
+navWrap.addEventListener('mousedown', e => { nDrag = true; nStartX = e.pageX - navWrap.offsetLeft; nScrollLeft = navWrap.scrollLeft; navWrap.classList.add('dragging'); });
+navWrap.addEventListener('mouseleave', () => { nDrag = false; navWrap.classList.remove('dragging'); });
+navWrap.addEventListener('mouseup',    () => { nDrag = false; navWrap.classList.remove('dragging'); });
+navWrap.addEventListener('mousemove',  e => { if (!nDrag) return; e.preventDefault(); navWrap.scrollLeft = nScrollLeft - (e.pageX - navWrap.offsetLeft - nStartX); });
+navWrap.addEventListener('touchstart', e => { nStartX = e.touches[0].pageX; nScrollLeft = navWrap.scrollLeft; }, {passive:true});
+navWrap.addEventListener('touchmove',  e => { navWrap.scrollLeft = nScrollLeft - (e.touches[0].pageX - nStartX); }, {passive:true});
+
+function setExTab(el) {
+  document.querySelectorAll('.ex-nav-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+}
+
+// ── LAYOUT ───────────────────────────────────────────
+let layout = 'stack';
+let order  = [0, 1, 2, 3];
+
+function setLayout(l) {
+  layout = l;
+  ['stack','grid','list'].forEach(x => document.getElementById('lb-' + x).classList.toggle('active', x === l));
+  renderCards();
+}
+
+// ── CARD RENDER ───────────────────────────────────────
+function renderCards() {
+  const area = document.getElementById('cardsArea');
+  if (!area) return;
+
+  if (layout === 'grid') {
+    area.innerHTML = `<div class="cards-grid">${CARDS.map(c => `<div class="gm"><div class="card-icon"><i class="ti ${c.icon}"></i></div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>`).join('')}</div>`;
+    return;
+  }
+  if (layout === 'list') {
+    area.innerHTML = `<div class="cards-list">${CARDS.map(c => `<div class="lm"><div class="card-icon"><i class="ti ${c.icon}"></i></div><div><div class="card-title">${c.title}</div><div style="font-size:11px;color:var(--text-secondary);margin-top:3px;line-height:1.55">${c.desc}</div></div></div>`).join('')}</div>`;
+    return;
+  }
+
+  // ── STACK ──
+  const scene = document.createElement('div');
+  scene.className = 'stack-scene';
+  scene.innerHTML = `
+    <div class="swipe-dir swipe-left"  id="swL"><i class="ti ti-x"></i> Skip</div>
+    <div class="swipe-dir swipe-right" id="swR"><i class="ti ti-check"></i> Select</div>`;
+
+  // render back-to-front so top card is last (highest z)
+  for (let i = order.length - 1; i >= 0; i--) {
+    const slot = i; // 0 = top
+    const c    = CARDS[order[i]];
+    const card = document.createElement('div');
+    card.className = 'w-card' + (slot === 0 ? ' is-top' : '');
+    card.dataset.slot   = slot;
+    card.dataset.cardId = order[i];
+    const offsetY = slot * 8;
+    const rot     = slot * 1.5;
+    const scale   = 1 - slot * 0.04;
+    card.style.cssText = `transform:translateY(${offsetY}px) rotate(${rot}deg) scale(${scale});z-index:${order.length - slot};opacity:${slot > 2 ? 0 : 1}`;
+    if (slot === 0) {
+      card.innerHTML = `<div class="card-icon"><i class="ti ${c.icon}"></i></div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div><div class="swipe-hint">Drag ← kiri skip · → kanan pilih · ${order.indexOf(order[0]) + 1}/${CARDS.length}</div>`;
+      attachDrag(card, scene);
+    }
+    scene.appendChild(card);
+  }
+
+  const dots = document.createElement('div');
+  dots.className = 'dot-nav';
+  CARDS.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (order[0] === i ? ' active' : '');
+    d.onclick = () => goCard(i);
+    dots.appendChild(d);
+  });
+
+  area.innerHTML = '';
+  area.appendChild(scene);
+  area.appendChild(dots);
+}
+
+function goCard(targetId) {
+  while (order[0] !== targetId) order.push(order.shift());
+  renderCards();
+}
+
+// ── DRAG LOGIC ────────────────────────────────────────
+function attachDrag(card, scene) {
+  let startX = 0, startY = 0, curX = 0, curY = 0, isDragging = false, startTime = 0;
+  const THRESHOLD = 80;
+
+  function onStart(x, y) {
+    isDragging = true; startX = x; startY = y; curX = 0; curY = 0;
+    startTime = Date.now(); card.style.transition = 'none';
+  }
+  function onMove(x, y) {
+    if (!isDragging) return;
+    curX = x - startX; curY = y - startY;
+    card.style.transform = `translate(${curX}px,${curY}px) rotate(${curX * 0.08}deg)`;
+    const ratio = Math.min(Math.abs(curX) / THRESHOLD, 1);
+    const swL = scene.querySelector('#swL');
+    const swR = scene.querySelector('#swR');
+    if (curX < -20)      { swL.style.opacity = ratio; swR.style.opacity = 0; }
+    else if (curX > 20)  { swR.style.opacity = ratio; swL.style.opacity = 0; }
+    else                 { swL.style.opacity = 0;     swR.style.opacity = 0; }
+    scene.querySelectorAll('.w-card:not(.is-top)').forEach((c, idx) => {
+      const slot = idx + 1;
+      c.style.transition = 'transform .1s';
+      c.style.transform = `translateY(${(slot - ratio * 0.4) * 8}px) rotate(${slot * 1.5 - ratio * slot * 0.3}deg) scale(${(1 - slot * 0.04) + ratio * 0.02})`;
+    });
+  }
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    const swL = scene.querySelector('#swL');
+    const swR = scene.querySelector('#swR');
+    swL.style.opacity = 0; swR.style.opacity = 0;
+    const fast = (Date.now() - startTime) < 250 && Math.abs(curX) > 40;
+    if (Math.abs(curX) > THRESHOLD || fast) {
+      const dir = curX < 0 ? -1 : 1;
+      card.classList.add('animating');
+      card.style.transform = `translate(${dir * 500}px,${curY - 40}px) rotate(${dir * 25}deg)`;
+      card.style.opacity = '0';
+      setTimeout(() => {
+        if (dir > 0) {
+          // selected — just cycle to next
+          order.push(order.shift());
+        } else {
+          // skipped
+          order.push(order.shift());
+        }
+        renderCards();
+      }, 350);
+    } else {
+      card.classList.add('settling');
+      card.style.transform = 'translateY(0px) rotate(0deg) scale(1)';
+      scene.querySelectorAll('.w-card:not(.is-top)').forEach((c, idx) => {
+        const slot = idx + 1;
+        c.style.transition = 'transform .4s cubic-bezier(.34,1.56,.64,1)';
+        c.style.transform = `translateY(${slot * 8}px) rotate(${slot * 1.5}deg) scale(${1 - slot * 0.04})`;
+      });
+    }
+  }
+
+  card.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX, e.clientY); });
+  window.addEventListener('mousemove',  e => { if (isDragging) onMove(e.clientX, e.clientY); });
+  window.addEventListener('mouseup',    () => { if (isDragging) onEnd(); });
+  card.addEventListener('touchstart', e => { onStart(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+  card.addEventListener('touchmove',  e => { onMove(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }, {passive:false});
+  card.addEventListener('touchend', onEnd);
+}
+
+renderCards();
+</script>
 </body>
 </html>
