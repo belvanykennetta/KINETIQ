@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KINETIQ — Move Smarter, Train Better</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg-base:        #0f1117;
+      --bg-surface:     #161b27;
+      --bg-card:        #1c2235;
+      --bg-card-hover:  #202840;
+      --bg-nav:         rgba(15,17,23,0.92);
+      --border-subtle:  #252d45;
+      --border-mid:     #2f3a58;
+      --border-bright:  #3d4f7a;
+      --accent:         #6366f1;
+      --accent-light:   #818cf8;
+      --accent-glow:    rgba(99,102,241,0.25);
+      --accent-2:       #22d3ee;
+      --text-primary:   #eef0f8;
+      --text-secondary: #8891aa;
+      --text-muted:     #4a5578;
+      --text-dim:       #2e3a55;
+      --gradient-hero:  linear-gradient(160deg, #eef0f8 0%, #7c85a8 100%);
+      --gradient-accent: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
+    }
+
+    #kinetiq-root {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-nav);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-link {
+      font-size: 12px; color: var(--text-muted); cursor: pointer; border: none; background: none;
+      transition: color 0.2s; padding: 6px 12px; border-radius: 20px;
+    }
+    .nav-link:hover { color: var(--text-primary); background: var(--bg-card); }
+    .nav-link.active { color: var(--text-primary); }
+
+    /* HERO */
+    .hero-section { padding: 24px; background: var(--bg-base); }
+    .hero-card {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border-subtle); border-radius: 20px;
+      background: var(--bg-surface); display: flex; flex-direction: row; min-height: 520px;
+    }
+    .hero-left { flex: 1; padding: 56px 48px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 10; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg-card); border: 1px solid var(--border-mid);
+      color: var(--text-secondary); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 20px; margin-bottom: 24px; width: fit-content;
+    }
+    .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .hero-title {
+      font-size: 72px; font-weight: 900; line-height: 0.92; letter-spacing: -0.04em;
+      background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;
+    }
+    .hero-subtitle { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 340px; margin-bottom: 36px; }
+    
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--gradient-accent); color: #fff;
+      padding: 12px 24px; border-radius: 40px; font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+      transition: all 0.2s; width: fit-content; letter-spacing: -0.01em; box-shadow: 0 4px 24px var(--accent-glow);
+    }
+    .cta-btn:hover { transform: scale(1.03); box-shadow: 0 6px 32px rgba(99,102,241,0.4); }
+    .cta-arrow { transition: transform 0.2s; }
+    .cta-btn:hover .cta-arrow { transform: translateX(3px); }
+
+    .hero-right { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-3d-canvas { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .floating-figure { position: relative; width: 220px; height: 320px; }
+    .figure-ring { position: absolute; border: 1px solid; border-radius: 50%; animation: orbit 8s linear infinite; }
+    .ring-1 { width: 300px; height: 300px; top: 10px; left: -40px; border-color: var(--border-subtle); animation-duration: 12s; }
+    .ring-2 { width: 200px; height: 200px; top: 60px; left: 10px; border-color: var(--border-mid); animation-duration: 8s; animation-direction: reverse; }
+    .ring-3 { width: 120px; height: 120px; top: 100px; left: 50px; border-color: rgba(99,102,241,0.3); animation-duration: 5s; }
+    @keyframes orbit { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    
+    .figure-body { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: float-body 4s ease-in-out infinite; }
+    @keyframes float-body { 0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-16px)} }
+    .figure-glow {
+      position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); width: 120px; height: 40px;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.18) 0%, transparent 70%); border-radius: 50%; animation: glow-pulse 4s ease-in-out infinite;
+    }
+    @keyframes glow-pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+    .hero-spotlight { position: absolute; top: -80px; left: -100px; width: 700px; height: 500px; background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.07) 0%, transparent 60%); pointer-events: none; }
+
+    .stat-pills { position: absolute; right: 32px; bottom: 32px; display: flex; flex-direction: column; gap: 8px; z-index: 10; }
+    .stat-pill { background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(8px); }
+    .stat-pill-val { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .stat-pill-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .stat-pill-icon { font-size: 18px; color: var(--accent-light); }
+
+    /* TEXT SECTION */
+    .text-cycle-section { border-top: 1px solid var(--border-subtle); background: var(--bg-surface); padding: 80px 24px; text-align: center; }
+    .text-cycle-headline { font-size: 44px; font-weight: 300; letter-spacing: -0.03em; color: var(--text-muted); line-height: 1.2; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .cycling-word { display: inline-block; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: opacity 0.3s; min-width: 160px; text-align: left; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { padding: 80px 24px; background: var(--bg-base); overflow: hidden; }
+    .testimonials-header { text-align: center; margin-bottom: 56px; }
+    .testimonials-badge { display: inline-block; border: 1px solid var(--border-mid); background: var(--bg-card); color: var(--text-secondary); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+    .testimonials-title { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+    .testimonials-subtitle { font-size: 13px; color: var(--text-muted); font-weight: 300; }
+    .testimonials-columns { display: flex; gap: 16px; justify-content: center; -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent); mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent); max-height: 580px; overflow: hidden; }
+    .testimonials-col { display: flex; flex-direction: column; gap: 16px; width: 260px; flex-shrink: 0; }
+    .testimonials-col-track { display: flex; flex-direction: column; gap: 16px; animation: scrollUp linear infinite; }
+    .col-a { animation-duration: 20s; } .col-b { animation-duration: 26s; } .col-c { animation-duration: 23s; }
+    @keyframes scrollUp { from{transform:translateY(0)} to{transform:translateY(-50%)} }
+    .testimonial-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 24px; width: 260px; flex-shrink: 0; }
+    .testimonial-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; }
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .author-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--bg-surface); border: 1px solid var(--border-mid); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--accent-light); }
+    .author-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+    .author-role { font-size: 11px; color: var(--text-muted); }
+
+    /* EXERCISE FINDER */
+    #page-exercise { background: var(--bg-base); min-height: 100vh; position: relative; }
+    .exercise-spotlight { position: fixed; pointer-events: none; z-index: 0; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%); transition: left 0.1s, top 0.1s; }
+    .exercise-nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid var(--border-subtle); background: rgba(15,17,23,0.92); backdrop-filter: blur(12px); }
+    .back-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; }
+    .back-btn:hover { color: var(--text-primary); }
+    
+    .exercise-content { max-width: 900px; margin: 0 auto; padding: 40px 32px; position: relative; z-index: 1; }
+    .exercise-header { margin-bottom: 36px; }
+    .exercise-title { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 8px; }
+    .exercise-sub { font-size: 13px; color: var(--text-secondary); }
+
+    /* SEARCH & FILTER CONTROLS */
+    .controls-row { display: flex; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; }
+    .search-bar { position: relative; flex: 1; max-width: 320px; }
+    .search-bar i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; }
+    .search-bar input { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 10px 14px 10px 40px; border-radius: 12px; color: var(--text-primary); font-family: inherit; font-size: 13px; transition: border-color 0.2s; }
+    .search-bar input:focus { outline: none; border-color: var(--accent); }
+    
+    .filter-group { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+    .filter-btn { background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .filter-btn:hover { color: var(--text-primary); border-color: var(--border-mid); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 4px 12px var(--accent-glow); }
+
+    .stack-container { border: 1px solid var(--border-subtle); background: rgba(22,27,39,0.7); border-radius: 20px; padding: 40px; backdrop-filter: blur(12px); }
+    .layout-toggle { display: flex; align-items: center; gap: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 4px; width: fit-content; margin: 0 auto 36px; }
+    .layout-btn { padding: 7px 10px; border-radius: 7px; border: none; cursor: pointer; background: transparent; color: var(--text-muted); font-size: 14px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+    .layout-btn.active { background: var(--accent); color: #fff; }
+    .layout-btn:hover:not(.active) { color: var(--text-primary); }
+
+    /* LOADING & ERROR STATES */
+    .loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0; gap: 16px; }
+    .spinner { width: 32px; height: 32px; border: 3px solid var(--border-subtle); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-msg, .empty-msg { text-align: center; color: var(--text-secondary); padding: 40px 20px; font-size: 14px; border: 1px dashed var(--border-subtle); border-radius: 16px; background: rgba(22,27,39,0.3); }
+
+    /* STACK LAYOUT */
+    .cards-stack-wrapper { position: relative; width: 260px; height: 230px; margin: 0 auto 24px; }
+    .workout-card { border: 1px solid var(--border-subtle); border-radius: 16px; background: var(--bg-card); padding: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+    .workout-card.stack-mode { position: absolute; width: 260px; height: 210px; }
+    .workout-card.stack-0 { top: 0; left: 0; z-index: 4; }
+    .workout-card.stack-1 { top: 8px; left: 8px; z-index: 3; transform: scale(0.96); opacity: 0.8; pointer-events: none; }
+    .workout-card.stack-2 { top: 16px; left: 16px; z-index: 2; transform: scale(0.92); opacity: 0.5; pointer-events: none; }
+    .workout-card.stack-3 { top: 24px; left: 24px; z-index: 1; transform: scale(0.88); opacity: 0.2; pointer-events: none; }
+    .workout-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+    .workout-card.active-top { border-color: var(--accent); box-shadow: 0 8px 32px rgba(15,17,23,0.5); }
+
+    .card-icon-wrap { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-surface); border: 1px solid var(--border-mid); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent-light); margin-bottom: 14px; }
+    .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; margin-bottom: 12px; }
+    .card-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .diff-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .cat-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+    .swipe-hint { display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 14px; border-top: 1px solid var(--border-subtle); padding-top: 10px; width: 100%; }
+    .swipe-hint span:hover { color: var(--accent-light); }
+
+    /* GRID LAYOUT */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .workout-card.grid-mode { min-height: 180px; }
+
+    /* LIST LAYOUT */
+    .cards-list { display: flex; flex-direction: column; gap: 12px; }
+    .workout-card.list-mode { display: flex; flex-direction: row; align-items: center; gap: 16px; padding: 16px; }
+    .workout-card.list-mode .card-icon-wrap { margin-bottom: 0; flex-shrink: 0; }
+    .workout-card.list-mode .card-desc { display: none; }
+
+    .dot-nav { display: flex; justify-content: center; gap: 6px; margin-top: 24px; }
+    .dot { height: 5px; border-radius: 3px; cursor: pointer; background: var(--border-mid); transition: all 0.2s; }
+    .dot.active { background: var(--accent); width: 16px; }
+    .dot:not(.active) { width: 5px; }
+
+    /* PAGE 3: DETAIL LATIHAN & THREE.JS VISUALIZER */
+    #page-detail { background: var(--bg-base); min-height: 100vh; }
+    .detail-container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+    .detail-header { margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .detail-category { font-size: 11px; text-transform: uppercase; color: var(--accent-2); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 6px; }
+    .detail-title { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
+    .detail-equipment { font-size: 13px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; }
+    
+    .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 24px; }
+    @media (max-width: 850px) { .detail-grid { grid-template-columns: 1fr; } }
+    
+    .viewer-panel { background: #0c0e14; border: 1px solid var(--border-subtle); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+    .viewer-label { position: absolute; top: 16px; left: 16px; background: rgba(22,27,39,0.7); border: 1px solid var(--border-subtle); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: var(--text-secondary); font-weight: 500; z-index: 5; backdrop-filter: blur(8px); }
+    .glb-container { width: 100%; height: 460px; position: relative; }
+    .viewer-controls-hint { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); padding: 12px 16px; font-size: 11px; color: var(--text-muted); display: flex; justify-content: center; gap: 16px; }
+    
+    .viewer-loading { position: absolute; inset: 0; background: #0f1117; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 4; }
+    .viewer-spinner { width: 24px; height: 24px; border: 2px solid var(--border-subtle); border-top-color: var(--accent-2); border-radius: 50%; animation: spin 0.6s linear infinite; }
+    
+    .detail-info { display: flex; flex-direction: column; gap: 20px; }
+    .detail-section { background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 24px; border-radius: 18px; }
+    .section-label { font-size: 12px; text-transform: uppercase; color: var(--accent-light); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; }
+    .detail-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    
+    .muscle-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .muscle-tag { font-size: 12px; padding: 4px 12px; border-radius: 6px; font-weight: 500; }
+    .muscle-tag.primary { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); color: var(--accent-light); }
+    .muscle-tag.secondary { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.2); color: var(--accent-2); }
+    
+    .tips-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .tips-list li { font-size: 13px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .tips-list i { margin-top: 3px; color: var(--accent-light); font-size: 14px; }
+    .tips-list.benefits i { color: #4ade80; }
+
+    .page-footer { text-align: center; padding: 32px 24px; font-size: 11px; color: var(--text-dim); border-top: 1px solid var(--border-subtle); margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+<div id="kinetiq-root">
+  <nav class="nav">
+    <div class="nav-logo">KINETIQ</div>
+    <div style="display:flex;gap:4px">
+      <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
+      <button class="nav-link" onclick="showPage('exercise')" id="nav-exercise">Exercise Finder</button>
+    </div>
+  </nav>
+
+  <div class="page active" id="page-home">
+    <section class="hero-section">
+      <div class="hero-card">
+        <div class="hero-spotlight"></div>
+        <div class="hero-left">
+          <div class="hero-eyebrow"><div class="hero-dot"></div>Now Live — v2.6 Engine</div>
+          <h1 class="hero-title">KINE<br>TIQ</h1>
+          <p class="hero-subtitle">Move Smarter, Train Better. Experience premium real-time interactive posture tracking and kinetic analysis.</p>
+          <button class="cta-btn" onclick="showPage('exercise')">
+            Find Your Perfect Exercise <span class="cta-arrow"><i class="ti ti-arrow-right"></i></span>
+          </button>
+        </div>
+        <div class="hero-right">
+          <div class="hero-3d-canvas">
+            <div class="floating-figure">
+              <div class="ring-1 figure-ring"></div>
+              <div class="ring-2 figure-ring"></div>
+              <div class="ring-3 figure-ring"></div>
+              <div class="figure-body">
+                <svg width="110" height="180" viewBox="0 0 110 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="55" cy="22" r="16" fill="#1c2235" stroke="#3d4f7a" stroke-width="1.5"/>
+                  <rect x="40" y="44" width="30" height="58" rx="8" fill="#1c2235" stroke="#2f3a58" stroke-width="1.5"/>
+                  <rect x="10" y="46" width="28" height="44" rx="7" fill="#161b27" stroke="#252d45" stroke-width="1.5" transform="rotate(-8 10 46)"/>
+                  <rect x="72" y="46" width="28" height="44" rx="7" fill="#161b27" stroke="#252d45" stroke-width="1.5" transform="rotate(8 72 46)"/>
+                  <rect x="38" y="104" width="14" height="52" rx="6" fill="#1c2235" stroke="#2f3a58" stroke-width="1.5"/>
+                  <rect x="58" y="104" width="14" height="52" rx="6" fill="#1c2235" stroke="#2f3a58" stroke-width="1.5"/>
+                  <circle cx="55" cy="22" r="8" fill="#252d45" opacity="0.9"/>
+                  <path d="M42 68 Q55 75 68 68" stroke="#6366f1" stroke-width="1.2" fill="none" opacity="0.7"/>
+                </svg>
+              </div>
+              <div class="figure-glow"></div>
+            </div>
+          </div>
+          <div class="stat-pills">
+            <div class="stat-pill"><span class="stat-pill-icon"><i class="ti ti-flame"></i></span><div><div class="stat-pill-val">847</div><div class="stat-pill-label">Calories / hr</div></div></div>
+            <div class="stat-pill"><span class="stat-pill-icon"><i class="ti ti-heart-rate-monitor"></i></span><div><div class="stat-pill-val">142 bpm</div><div class="stat-pill-label">Heart Rate</div></div></div>
+            <div class="stat-pill"><span class="stat-pill-icon"><i class="ti ti-trending-up"></i></span><div><div class="stat-pill-val">98%</div><div class="stat-pill-label">Form Score</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="text-cycle-section"><h2 class="text-cycle-headline">Your <span class="cycling-word" id="cycle-word">workouts</span> starts here.</h2></section>
+    <section class="testimonials-section">
+      <div class="testimonials-header"><div class="testimonials-badge">Testimonials</div><h2 class="testimonials-title">What our users say</h2><p class="testimonials-subtitle">See how athletes worldwide are enhancing their kinetic workflows.</p></div>
+      <div class="testimonials-columns" id="testimonials-cols"></div>
+    </section>
+    <div class="page-footer">© 2026 KINETIQ Engineering Pipeline.</div>
+  </div>
+
+  <div class="page" id="page-exercise">
+    <div id="exercise-spotlight-cursor" class="exercise-spotlight"></div>
+    <nav class="exercise-nav">
+      <button class="back-btn" onclick="showPage('home')"><i class="ti ti-chevron-left"></i> Kembali ke Dashboard</button>
+      <span style="font-size:13px;font-weight:600;color:var(--text-muted)">WORKOUT CATALOG</span>
+    </nav>
+    <div class="exercise-content">
+      <div class="exercise-header">
+        <h1 class="exercise-title">Katalog Latihan Otot</h1>
+        <p class="exercise-sub">Gunakan filter kelompok otot atau cari gerakan gym interaktif yang ingin kamu pelajari.</p>
+      </div>
+
+      <div class="controls-row">
+        <div class="search-bar">
+          <i class="ti ti-search"></i>
+          <input type="text" id="search-input" placeholder="Cari gerakan latihan..." oninput="onSearchInput(event)">
+        </div>
+        <div class="filter-group" id="category-filter">
+          </div>
+      </div>
+
+      <div class="stack-container">
+        <div class="layout-toggle">
+          <button class="layout-btn active" id="btn-stack" onclick="setLayout('stack')" title="Stack view"><i class="ti ti-layers-intersect"></i></button>
+          <button class="layout-btn" id="btn-grid" onclick="setLayout('grid')" title="Grid view"><i class="ti ti-layout-grid"></i></button>
+          <button class="layout-btn" id="btn-list" onclick="setLayout('list')" title="List view"><i class="ti ti-layout-list"></i></button>
+        </div>
+
+        <div id="exercise-loading" class="loader-container" style="display: none;">
+          <div class="spinner"></div>
+          <p style="font-size: 12px; color: var(--text-secondary)">Menghubungkan ke API Kinetiq...</p>
+        </div>
+
+        <div id="cards-area"></div>
+      </div>
+    </div>
+    <div class="page-footer">© 2026 KINETIQ Engineering Pipeline.</div>
+  </div>
+
+  <div class="page" id="page-detail">
+    <nav class="exercise-nav">
+      <button class="back-btn" onclick="showPage('exercise')"><i class="ti ti-arrow-left"></i> Kembali ke Katalog</button>
+      <span style="font-size:13px;font-weight:600;color:var(--accent-2)">3D WORKOUT VIEW</span>
+    </nav>
+    <div class="detail-container" id="detail-content">
+      </div>
+    <div class="page-footer">© 2026 KINETIQ Engineering Pipeline.</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<script src="/js/api.js"></script>
+<script src="/js/viewer.js"></script>
+<script src="/js/app.js"></script>
+
+</body>
+</html>
