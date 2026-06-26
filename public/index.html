@@ -112,6 +112,25 @@ html,body{background:var(--bg-base);font-family:'Inter',system-ui,sans-serif;col
 .section-title{font-size:28px;font-weight:900;letter-spacing:-.03em;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
 .section-sub{font-size:12px;color:var(--text-muted);margin-bottom:28px}
 .stack-outer{background:rgba(22,27,39,.5);border:1px solid var(--border-subtle);border-radius:20px;padding:28px;backdrop-filter:blur(12px)}
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.category-section{margin-bottom:24px}
+.category-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.category-section-title{font-size:15px;font-weight:800;color:var(--text-primary)}
+.category-section-sub{font-size:11px;color:var(--text-muted);margin-top:4px}
+.category-reset{border:none;background:transparent;color:var(--accent-2);font-size:11px;font-family:inherit;cursor:pointer}
+.category-card{border:1px solid var(--border-subtle);border-radius:16px;background:var(--bg-card);padding:18px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s;min-height:150px}
+.category-card:hover{transform:translateY(-2px);border-color:var(--border-bright);background:var(--bg-card-hover)}
+.category-card.active{border-color:var(--accent-light);box-shadow:0 0 24px var(--accent-glow)}
+.category-icon{width:42px;height:42px;border-radius:12px;background:var(--bg-surface);border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;color:var(--accent-light)}
+.category-title{font-size:15px;font-weight:800;color:var(--text-primary);margin-bottom:7px}
+.category-desc{font-size:11px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px}
+.category-count{font-size:10px;color:var(--accent-2);text-transform:uppercase;letter-spacing:.1em}
+.exercise-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.category-back{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border-subtle);background:var(--bg-surface);color:var(--text-secondary);border-radius:20px;padding:7px 13px;font-size:11px;font-family:inherit;cursor:pointer;transition:all .2s}
+.category-back:hover{color:var(--text-primary);border-color:var(--border-mid)}
+.selected-label{font-size:12px;color:var(--text-muted)}
+.selected-label strong{color:var(--text-primary)}
+@media (max-width:620px){.category-grid{grid-template-columns:1fr}.exercise-toolbar{align-items:flex-start;flex-direction:column}}
 
 /* Layout toggle */
 .layout-toggle{display:flex;gap:3px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:10px;padding:3px;margin:0 auto 20px;width:fit-content}
@@ -144,10 +163,39 @@ html,body{background:var(--bg-base);font-family:'Inter',system-ui,sans-serif;col
 /* Grid & List */
 .cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cards-list{display:flex;flex-direction:column;gap:8px}
-.gm,.lm{border:1px solid var(--border-subtle);border-radius:14px;background:var(--bg-card);padding:16px;transition:border-color .2s}
+.gm,.lm{border:1px solid var(--border-subtle);border-radius:14px;background:var(--bg-card);padding:16px;transition:border-color .2s;cursor:pointer}
 .gm:hover,.lm:hover{border-color:var(--border-mid)}
 .lm{display:flex;align-items:center;gap:14px}
 .lm .card-icon{margin-bottom:0;flex-shrink:0;width:34px;height:34px;font-size:15px}
+
+/* Detail viewer */
+#page-detail{background:var(--bg-base);min-height:100vh}
+.detail-main{max-width:1100px;margin:0 auto;padding:34px 20px 52px}
+.detail-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.detail-category{font-size:10px;color:var(--accent-2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.detail-title{font-size:34px;font-weight:900;letter-spacing:-.03em;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.detail-pill{font-size:11px;color:var(--text-secondary);border:1px solid var(--border-mid);background:var(--bg-card);border-radius:20px;padding:5px 11px}
+.detail-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:18px}
+.viewer-panel,.detail-info{background:rgba(22,27,39,.5);border:1px solid var(--border-subtle);border-radius:20px;padding:18px}
+.viewer-label,.section-label{font-size:10px;color:var(--text-muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.glb-container{position:relative;height:520px;overflow:hidden;border-radius:16px;background:#0f1117;border:1px solid var(--border-subtle)}
+.glb-container canvas{display:block;width:100%;height:100%}
+.viewer-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--text-secondary);background:rgba(15,17,23,.78);z-index:2}
+.viewer-spinner{width:20px;height:20px;border-radius:50%;border:2px solid var(--border-mid);border-top-color:var(--accent-light);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.viewer-controls-hint{font-size:11px;color:var(--text-muted);margin-top:12px;text-align:center}
+.detail-section{padding:16px 0;border-bottom:1px solid var(--border-subtle)}
+.detail-section:first-child{padding-top:0}
+.detail-section:last-child{border-bottom:none;padding-bottom:0}
+.detail-desc{font-size:13px;line-height:1.8;color:var(--text-secondary)}
+.muscle-tags{display:flex;gap:8px;flex-wrap:wrap}
+.muscle-tag{font-size:11px;border-radius:20px;padding:5px 10px}
+.muscle-tag.primary{background:rgba(99,102,241,.15);color:var(--accent-light);border:1px solid rgba(99,102,241,.3)}
+.muscle-tag.secondary{background:rgba(34,211,238,.1);color:var(--accent-2);border:1px solid rgba(34,211,238,.25)}
+.tips-list{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:12px;color:var(--text-secondary);line-height:1.55}
+.tips-list i{color:var(--accent-light);margin-right:6px}
+@media (max-width:820px){.detail-grid{grid-template-columns:1fr}.glb-container{height:390px}.detail-title{font-size:28px}}
 </style>
 </head>
 <body>
@@ -249,22 +297,126 @@ html,body{background:var(--bg-base);font-family:'Inter',system-ui,sans-serif;col
   <div class="pg-footer">© 2026 KINETIQ · All systems nominal</div>
 </div>
 
+<!-- Detail / 3D Model -->
+<div class="page" id="page-detail">
+  <nav class="nav-p2">
+    <div class="nav-p2-top">
+      <button class="back-btn" onclick="gotoPage('exercise')">
+        <i class="ti ti-chevron-left" aria-hidden="true"></i> Back to Exercises
+      </button>
+      <div class="nav-p2-logo">KINETIQ</div>
+    </div>
+  </nav>
+  <main class="detail-main" id="detailContent"></main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="/js/viewer.js"></script>
+
 <script>
 // ── DATA ──────────────────────────────────────────────
 const CARDS = [
-  {id:0, category:'core', title:'Core Routine',  desc:'Sculpt and stabilize your midline with precision plank, hollow-body, and rotational work.', icon:'ti-circles-relation'},
-  {id:1, category:'legs', title:'Legs Routine',  desc:'Build power, depth, and lower-body explosion with squats, lunges, and deadlift chains.',    icon:'ti-run'},
-  {id:2, category:'pull', title:'Pull Routine',  desc:'Focus on back, traps, and absolute upper body pull strength via rows and pull-up variations.', icon:'ti-arrows-vertical'},
-  {id:3, category:'push', title:'Push Routine',  desc:'Dominate chest, shoulders, and triceps compression metrics with progressive overload.',     icon:'ti-bolt'},
+  {id:0, exerciseId:'4', category:'core', title:'Core Routine',  desc:'Sculpt and stabilize your midline with precision plank, hollow-body, and rotational work.', icon:'ti-circles-relation'},
+  {id:1, exerciseId:'9', category:'legs', title:'Legs Routine',  desc:'Build power, depth, and lower-body explosion with squats, lunges, and deadlift chains.',    icon:'ti-run'},
+  {id:2, exerciseId:'16', category:'pull', title:'Pull Routine',  desc:'Focus on back, traps, and absolute upper body pull strength via rows and pull-up variations.', icon:'ti-arrows-vertical'},
+  {id:3, exerciseId:'18', category:'push', title:'Push Routine',  desc:'Dominate chest, shoulders, and triceps compression metrics with progressive overload.',     icon:'ti-bolt'},
   
   // Tambahan Pilihan Gerakan Spesifiknya:
-  {id:4, category:'core', title:'Bicycle Crunches', desc:'Latihan crunch interaktif yang meniru gerakan mengayuh sepeda.', icon:'ti-circles-relation'},
-  {id:5, category:'core', title:'Plank', desc:'Latihan isometrik menahan posisi tubuh sejajar untuk membangun ketahanan core.', icon:'ti-circles-relation'},
-  {id:6, category:'legs', title:'Barbell Squat', desc:'Raja dari segala latihan kaki untuk merangsang pertumbuhan paha depan.', icon:'ti-run'},
-  {id:7, category:'legs', title:'Deadlift', desc:'Latihan compound legendaris untuk mengangkat beban murni dari lantai.', icon:'ti-run'},
-  {id:8, category:'pull', title:'Pull-Up', desc:'Latihan beban tubuh terbaik untuk melebarkan sayap punggung.', icon:'ti-arrows-vertical'},
-  {id:9, category:'push', title:'Barbell Bench Press', desc:'Latihan compound utama untuk membangun ketebalan otot dada.', icon:'ti-bolt'}
+  {id:4, exerciseId:'1', category:'core', title:'Bicycle Crunches', desc:'Latihan crunch interaktif yang meniru gerakan mengayuh sepeda.', icon:'ti-circles-relation'},
+  {id:5, exerciseId:'4', category:'core', title:'Plank', desc:'Latihan isometrik menahan posisi tubuh sejajar untuk membangun ketahanan core.', icon:'ti-circles-relation'},
+  {id:6, exerciseId:'9', category:'legs', title:'Barbell Squat', desc:'Raja dari segala latihan kaki untuk merangsang pertumbuhan paha depan.', icon:'ti-run'},
+  {id:7, exerciseId:'11', category:'legs', title:'Deadlift', desc:'Latihan compound legendaris untuk mengangkat beban murni dari lantai.', icon:'ti-run'},
+  {id:8, exerciseId:'16', category:'pull', title:'Pull-Up', desc:'Latihan beban tubuh terbaik untuk melebarkan sayap punggung.', icon:'ti-arrows-vertical'},
+  {id:9, exerciseId:'18', category:'push', title:'Barbell Bench Press', desc:'Latihan compound utama untuk membangun ketebalan otot dada.', icon:'ti-bolt'}
 ];
+
+let activeViewer = null;
+let exercisesCache = null;
+let allCards = CARDS;
+let displayCards = CARDS;
+let activeCategory = null;
+
+const CATEGORY_META = {
+  core: {
+    title: 'Core',
+    icon: 'ti-circles-relation',
+    desc: 'Gerakan untuk perut, stabilitas, dan kontrol tubuh.'
+  },
+  legs: {
+    title: 'Legs',
+    icon: 'ti-run',
+    desc: 'Gerakan kaki untuk power, balance, dan lower body strength.'
+  },
+  pull: {
+    title: 'Pull',
+    icon: 'ti-arrows-vertical',
+    desc: 'Gerakan tarikan untuk punggung, bicep, dan upper body.'
+  },
+  push: {
+    title: 'Push',
+    icon: 'ti-bolt',
+    desc: 'Gerakan dorong untuk dada, bahu, dan tricep.'
+  }
+};
+
+async function getExercises() {
+  if (exercisesCache) return exercisesCache;
+  const res = await fetch('/api/exercises');
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || 'Gagal memuat data latihan');
+  exercisesCache = json.data;
+  return exercisesCache;
+}
+
+async function getExerciseForCard(cardId) {
+  const card = displayCards[Number(cardId)] || CARDS.find(c => c.id === Number(cardId));
+  const exercises = await getExercises();
+  return exercises.find(ex => ex.id === card?.exerciseId)
+    || exercises.find(ex => ex.title.toLowerCase() === card?.title.toLowerCase())
+    || exercises.find(ex => ex.category === card?.category)
+    || exercises[0];
+}
+
+function exerciseToCard(ex) {
+  return {
+    id: ex.id,
+    exerciseId: ex.id,
+    category: ex.category,
+    title: ex.title,
+    desc: ex.description,
+    icon: ex.icon
+  };
+}
+
+async function loadCardsFromApi() {
+  try {
+    const exercises = await getExercises();
+    allCards = exercises.map(exerciseToCard);
+    displayCards = activeCategory
+      ? allCards.filter(card => card.category === activeCategory)
+      : allCards;
+    order = displayCards.map((_, i) => i);
+    renderCards();
+  } catch (err) {
+    console.warn('Gagal memuat semua latihan, memakai kartu fallback:', err);
+  }
+}
+
+function selectCategory(category) {
+  activeCategory = category;
+  displayCards = allCards.filter(card => card.category === category);
+  order = displayCards.map((_, i) => i);
+  renderCards();
+}
+
+function showCategories() {
+  activeCategory = null;
+  displayCards = allCards;
+  order = displayCards.map((_, i) => i);
+  renderCards();
+}
 
 const TESTIMONIALS = [
   {text:'gila sih KINETIQ beneran next level, bisa liat otot mana yang gerak pas latihan, no more asal asalan nge-gym bestie!', name:'Shabrina Sarayati', role:'Fitness Enthusiast', initials:'SS'},
@@ -277,11 +429,88 @@ const TESTIMONIALS = [
 
 // ── PAGE ROUTING ──────────────────────────────────────
 function gotoPage(p) {
+  if (activeViewer && p !== 'detail') {
+    activeViewer.destroy();
+    activeViewer = null;
+  }
   document.getElementById('page-home').classList.remove('active');
   document.getElementById('page-exercise').classList.remove('active');
-  document.getElementById(p === 'home' ? 'page-home' : 'page-exercise').classList.add('active');
+  document.getElementById('page-detail').classList.remove('active');
+  document.getElementById(p === 'home' ? 'page-home' : p === 'detail' ? 'page-detail' : 'page-exercise').classList.add('active');
   window.scrollTo(0, 0);
-  if (p === 'exercise') renderCards();
+  if (p === 'exercise') loadCardsFromApi();
+}
+
+function capitalizeFirst(str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+}
+
+async function openCardDetail(cardId) {
+  try {
+    const ex = await getExerciseForCard(cardId);
+    renderDetail(ex);
+    gotoPage('detail');
+  } catch (err) {
+    alert('Gagal memuat model. Pastikan server dijalankan dengan npm start. Detail: ' + err.message);
+  }
+}
+
+function renderDetail(ex) {
+  const content = document.getElementById('detailContent');
+  content.innerHTML = `
+    <div class="detail-header">
+      <div>
+        <div class="detail-category">${capitalizeFirst(ex.category)}</div>
+        <h1 class="detail-title">${ex.title}</h1>
+        <div class="detail-meta">
+          <span class="detail-pill">${capitalizeFirst(ex.difficulty)}</span>
+          <span class="detail-pill"><i class="ti ti-tool"></i> ${ex.equipment}</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail-grid">
+      <div class="viewer-panel">
+        <div class="viewer-label">Model 3D Interaktif</div>
+        <div id="glb-container" class="glb-container">
+          <div id="viewer-loading" class="viewer-loading">
+            <div class="viewer-spinner"></div>
+            <span id="viewer-loading-text">Memuat model...</span>
+          </div>
+        </div>
+        <div class="viewer-controls-hint">
+          <i class="ti ti-mouse"></i> Drag: Rotate &nbsp;|&nbsp;
+          <i class="ti ti-zoom-in"></i> Scroll: Zoom &nbsp;|&nbsp;
+          <i class="ti ti-hand-finger"></i> Kanan: Pan
+        </div>
+      </div>
+      <div class="detail-info">
+        <div class="detail-section">
+          <div class="section-label">Deskripsi</div>
+          <p class="detail-desc">${ex.description}</p>
+        </div>
+        <div class="detail-section">
+          <div class="section-label">Otot Utama</div>
+          <div class="muscle-tags">${ex.muscles_primary.map(m => `<span class="muscle-tag primary">${m}</span>`).join('')}</div>
+        </div>
+        <div class="detail-section">
+          <div class="section-label">Otot Pendukung</div>
+          <div class="muscle-tags">${ex.muscles_secondary.map(m => `<span class="muscle-tag secondary">${m}</span>`).join('')}</div>
+        </div>
+        <div class="detail-section">
+          <div class="section-label">Tips Teknik</div>
+          <ul class="tips-list">${ex.tips.map(t => `<li><i class="ti ti-check"></i>${t}</li>`).join('')}</ul>
+        </div>
+        <div class="detail-section">
+          <div class="section-label">Manfaat</div>
+          <ul class="tips-list">${ex.benefits.map(b => `<li><i class="ti ti-star"></i>${b}</li>`).join('')}</ul>
+        </div>
+      </div>
+    </div>`;
+
+  requestAnimationFrame(() => {
+    activeViewer = new GLBViewer('glb-container');
+    activeViewer.loadModel(ex.glb_path);
+  });
 }
 
 // ── HERO TILT ─────────────────────────────────────────
@@ -366,13 +595,19 @@ function setLayout(l) {
 function renderCards() {
   const area = document.getElementById('cardsArea');
   if (!area) return;
+  const cards = displayCards.length ? displayCards : CARDS;
+
+  if (!activeCategory) {
+    renderCategoryCards(area);
+    return;
+  }
 
   if (layout === 'grid') {
-    area.innerHTML = `<div class="cards-grid">${CARDS.map(c => `<div class="gm"><div class="card-icon"><i class="ti ${c.icon}"></i></div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>`).join('')}</div>`;
+    area.innerHTML = renderExerciseToolbar(cards.length) + `<div class="cards-grid">${cards.map((c, i) => `<div class="gm" onclick="openCardDetail(${i})"><div class="card-icon"><i class="ti ${c.icon}"></i></div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>`).join('')}</div>`;
     return;
   }
   if (layout === 'list') {
-    area.innerHTML = `<div class="cards-list">${CARDS.map(c => `<div class="lm"><div class="card-icon"><i class="ti ${c.icon}"></i></div><div><div class="card-title">${c.title}</div><div style="font-size:11px;color:var(--text-secondary);margin-top:3px;line-height:1.55">${c.desc}</div></div></div>`).join('')}</div>`;
+    area.innerHTML = renderExerciseToolbar(cards.length) + `<div class="cards-list">${cards.map((c, i) => `<div class="lm" onclick="openCardDetail(${i})"><div class="card-icon"><i class="ti ${c.icon}"></i></div><div><div class="card-title">${c.title}</div><div style="font-size:11px;color:var(--text-secondary);margin-top:3px;line-height:1.55">${c.desc}</div></div></div>`).join('')}</div>`;
     return;
   }
 
@@ -386,7 +621,7 @@ function renderCards() {
   // render back-to-front so top card is last (highest z)
   for (let i = order.length - 1; i >= 0; i--) {
     const slot = i; // 0 = top
-    const c    = CARDS[order[i]];
+    const c    = cards[order[i]];
     const card = document.createElement('div');
     card.className = 'w-card' + (slot === 0 ? ' is-top' : '');
     card.dataset.slot   = slot;
@@ -396,7 +631,7 @@ function renderCards() {
     const scale   = 1 - slot * 0.04;
     card.style.cssText = `transform:translateY(${offsetY}px) rotate(${rot}deg) scale(${scale});z-index:${order.length - slot};opacity:${slot > 2 ? 0 : 1}`;
     if (slot === 0) {
-      card.innerHTML = `<div class="card-icon"><i class="ti ${c.icon}"></i></div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div><div class="swipe-hint">Drag ← kiri skip · → kanan pilih · ${order.indexOf(order[0]) + 1}/${CARDS.length}</div>`;
+      card.innerHTML = `<div class="card-icon"><i class="ti ${c.icon}"></i></div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div><div class="swipe-hint">Klik untuk model · Drag ← kiri skip · → kanan pilih · ${order.indexOf(order[0]) + 1}/${cards.length}</div>`;
       attachDrag(card, scene);
     }
     scene.appendChild(card);
@@ -404,7 +639,7 @@ function renderCards() {
 
   const dots = document.createElement('div');
   dots.className = 'dot-nav';
-  CARDS.forEach((_, i) => {
+  cards.forEach((_, i) => {
     const d = document.createElement('div');
     d.className = 'dot' + (order[0] === i ? ' active' : '');
     d.onclick = () => goCard(i);
@@ -412,8 +647,39 @@ function renderCards() {
   });
 
   area.innerHTML = '';
+  area.insertAdjacentHTML('beforeend', renderExerciseToolbar(cards.length));
   area.appendChild(scene);
   area.appendChild(dots);
+}
+
+function renderExerciseToolbar(count) {
+  const meta = CATEGORY_META[activeCategory] || { title: 'Exercises' };
+  return `
+    <div class="exercise-toolbar">
+      <button class="category-back" onclick="showCategories()">
+        <i class="ti ti-chevron-left"></i> Kategori
+      </button>
+      <div class="selected-label"><strong>${meta.title}</strong> · ${count} gerakan</div>
+    </div>`;
+}
+
+function renderCategoryCards(area) {
+  const cards = allCards.length ? allCards : CARDS;
+  const categories = ['core', 'legs', 'pull', 'push'];
+  area.innerHTML = `
+    <div class="category-grid">
+      ${categories.map(cat => {
+        const meta = CATEGORY_META[cat];
+        const count = cards.filter(card => card.category === cat).length;
+        return `
+          <div class="category-card" onclick="selectCategory('${cat}')">
+            <div class="category-icon"><i class="ti ${meta.icon}"></i></div>
+            <div class="category-title">${meta.title}</div>
+            <div class="category-desc">${meta.desc}</div>
+            <div class="category-count">${count} gerakan</div>
+          </div>`;
+      }).join('')}
+    </div>`;
 }
 
 function goCard(targetId) {
@@ -423,16 +689,17 @@ function goCard(targetId) {
 
 // ── DRAG LOGIC ────────────────────────────────────────
 function attachDrag(card, scene) {
-  let startX = 0, startY = 0, curX = 0, curY = 0, isDragging = false, startTime = 0;
+  let startX = 0, startY = 0, curX = 0, curY = 0, isDragging = false, startTime = 0, didDrag = false;
   const THRESHOLD = 80;
 
   function onStart(x, y) {
     isDragging = true; startX = x; startY = y; curX = 0; curY = 0;
-    startTime = Date.now(); card.style.transition = 'none';
+    didDrag = false; startTime = Date.now(); card.style.transition = 'none';
   }
   function onMove(x, y) {
     if (!isDragging) return;
     curX = x - startX; curY = y - startY;
+    if (Math.abs(curX) > 6 || Math.abs(curY) > 6) didDrag = true;
     card.style.transform = `translate(${curX}px,${curY}px) rotate(${curX * 0.08}deg)`;
     const ratio = Math.min(Math.abs(curX) / THRESHOLD, 1);
     const swL = scene.querySelector('#swL');
@@ -460,13 +727,12 @@ function attachDrag(card, scene) {
       card.style.opacity = '0';
       setTimeout(() => {
         if (dir > 0) {
-          // selected — just cycle to next
-          order.push(order.shift());
+          openCardDetail(card.dataset.cardId);
         } else {
           // skipped
           order.push(order.shift());
+          renderCards();
         }
-        renderCards();
       }, 350);
     } else {
       card.classList.add('settling');
@@ -480,6 +746,7 @@ function attachDrag(card, scene) {
   }
 
   card.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX, e.clientY); });
+  card.addEventListener('click', () => { if (!didDrag) openCardDetail(card.dataset.cardId); });
   window.addEventListener('mousemove',  e => { if (isDragging) onMove(e.clientX, e.clientY); });
   window.addEventListener('mouseup',    () => { if (isDragging) onEnd(); });
   card.addEventListener('touchstart', e => { onStart(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});

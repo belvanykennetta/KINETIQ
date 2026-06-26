@@ -85,6 +85,8 @@ class GLBViewer {
 
   // Muat file .glb dari path
   loadModel(glbPath) {
+    glbPath = this._normalizeModelPath(glbPath);
+
     // Hapus model lama kalau ada
     if (this.model) {
       this.scene.remove(this.model);
@@ -126,6 +128,11 @@ class GLBViewer {
         this._showLoading(false);
       }
     );
+  }
+
+  _normalizeModelPath(glbPath) {
+    if (!glbPath) return glbPath;
+    return glbPath.replace(/^\/3D Model \(\.glb\)/, '/models');
   }
 
   // Tampilkan placeholder mesh jika .glb belum ada

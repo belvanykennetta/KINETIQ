@@ -225,6 +225,21 @@
     "tags": ["bicep", "dumbbell"]
   },
   {
+    "id": "24",
+    "title": "Dumbbell Front Raise",
+    "category": "pull",
+    "description": "Mengangkat dumbbell ke depan secara terkontrol untuk melatih bahu depan dan stabilitas tubuh bagian atas.",
+    "difficulty": "beginner",
+    "equipment": "Dumbbell",
+    "muscles_primary": ["Anterior Deltoid"],
+    "muscles_secondary": ["Upper Chest", "Trapezius"],
+    "tips": ["Jaga siku sedikit menekuk", "Angkat dumbbell sampai setinggi bahu", "Hindari mengayunkan badan"],
+    "benefits": ["Menguatkan bahu depan", "Meningkatkan kontrol gerakan bahu", "Membantu stabilitas upper body"],
+    "glb_path": "/3D Model (.glb)/Pull/Dumbbell Front Raise.glb",
+    "icon": "ti-arrows-vertical",
+    "tags": ["dumbbell", "front raise", "bahu"]
+  },
+  {
     "id": "16",
     "title": "Pull-Up",
     "category": "pull",
